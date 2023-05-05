@@ -1,0 +1,21 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+
+server:
+  port: 8084
+
+logging:
+  level:
+    root: INFO
+
+app:
+  execution-time-sec: ${EXECUTION_TIME_SEC}
+  num-of-jobs: ${NUM_OF_JOBS}
+  period: ${PERIOD}
+  partitions: ${PARTITIONS}
+  topic-replication-factor: ${TOPIC_REPLICATION_FACTOR}
+  show-generated-records: ${SHOW_GENERATED_RECORDS}

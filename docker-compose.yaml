@@ -1,0 +1,67 @@
+version: "3.9"
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    platform: linux/amd64
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    platform: linux/amd64
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9093,OUTSIDE://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_LISTENERS: INSIDE://:9093,OUTSIDE://:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  kafdrop:
+    image: obsidiandynamics/kafdrop:latest
+    platform: linux/amd64
+    depends_on:
+      - kafka
+    ports:
+      - "9000:9000"
+    environment:
+      KAFKA_BROKERCONNECT: kafka:9093
+      JVM_OPTS: -Xms32M -Xmx64M
+
+
+#  cassandra:
+#    container_name: cassandra
+#    image: cassandra:latest
+#    ports:
+#      - "9042:9042"
+#    environment:
+#      - "MAX_HEAP_SIZE=256M"
+#      - "HEAP_NEWSIZE=128M"
+#    restart: always
+#    volumes:
+#      - ./cassandra_data:/var/lib/cassandra
+#    healthcheck:
+#      test: [ "CMD", "cqlsh", "-u cassandra", "-p cassandra" ,"-e describe keyspaces" ]
+#      interval: 15s
+#      timeout: 10s
+#      retries: 10
+#
+#  cassandra-load-keyspace:
+#    container_name: cassandra-load-keyspace
+#    image: cassandra:latest
+#    depends_on:
+#      cassandra:
+#        condition: service_healthy
+#    volumes:
+#      - ./src/main/resources/cassandra_schema.cql:/schema.cql
+#    command: /bin/bash -c "echo loading cassandra keyspace && cqlsh cassandra -f /schema.cql"

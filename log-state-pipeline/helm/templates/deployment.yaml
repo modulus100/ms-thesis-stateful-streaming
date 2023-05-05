@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}
+    spec:
+      serviceAccountName: kafka-streams-job
+      containers:
+        - name: {{ .Values.appName }}
+          image: 778851315920.dkr.ecr.us-east-1.amazonaws.com/kafka-streams-stateful-streaming-job
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9000

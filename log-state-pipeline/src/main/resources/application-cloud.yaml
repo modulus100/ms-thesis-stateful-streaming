@@ -1,0 +1,3 @@
+spring:
+  kafka:
+    bootstrap-servers: theodolite-kafka-kafka-bootstrap:9092
