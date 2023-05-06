@@ -11,7 +11,6 @@ class GeneratorConfig {
 
     @ConfigurationProperties(prefix = "app")
     data class Props(
-        val executionTimeSec: String,
         val numOfJobs: String,
         val period: String,
         val partitions: String,
@@ -23,7 +22,6 @@ class GeneratorConfig {
                 Kafka partitions: $partitions
                 Job period (ms): $period
                 Number of jobs: $numOfJobs
-                Execution time (s): $executionTimeSec
                 Topic replication factor: $topicReplicationFactor
                 Show records: $showGeneratedRecords
             """.trimIndent()
