@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.appName }}
+  name: "load-generator"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Values.appName }}
+      app: "load-generator"
   template:
     metadata:
       labels:
-        app: {{ .Values.appName }}
+        app: "load-generator"
     spec:
-      serviceAccountName: {{ .Values.serviceAccount.name }}
+      serviceAccountName: "benchmark"
       containers:
-        - name: {{ .Values.loadGenerator.name }}
+        - name: "load-generator"
           image: 778851315920.dkr.ecr.us-east-1.amazonaws.com/load-generator:latest
           imagePullPolicy: Always
           ports:

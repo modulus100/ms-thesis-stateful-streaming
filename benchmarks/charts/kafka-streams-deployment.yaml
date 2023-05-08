@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.kafkaStreams.name }}
+  name: "kafka-streams-job"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Values.kafkaStreams.name }}
+      app: "kafka-streams-job"
   template:
     metadata:
       labels:
-        app: {{ .Values.kafkaStreams.name }}
+        app: "kafka-streams-job"
     spec:
-      serviceAccountName: {{ .Values.serviceAccount.name }}
+      serviceAccountName: "benchmarks"
       containers:
-        - name: {{ .Values.kafkaStreams.name }}
+        - name: "kafka-streams-job"
           image: 778851315920.dkr.ecr.us-east-1.amazonaws.com/kafka-streams-stateful-streaming-job
           imagePullPolicy: Always
           ports:

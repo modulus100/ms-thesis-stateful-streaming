@@ -1,7 +1,7 @@
 apiVersion: theodolite.rocks/v1beta1
 kind: execution
 metadata:
-  name: theodolite-example-execution
+  name: theodolite-kafka-streams-execute
 spec:
   benchmark: "kafka-streams-benchmark"
   load:
