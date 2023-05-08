@@ -1,0 +1,1 @@
+kubectl delete exec theodolite-kafka-streams-execute

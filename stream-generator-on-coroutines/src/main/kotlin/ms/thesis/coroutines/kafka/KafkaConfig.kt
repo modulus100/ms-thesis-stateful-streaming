@@ -1,7 +1,5 @@
 package ms.thesis.coroutines.kafka
 
-import ms.thesis.coroutines.config.GeneratorConfig
-import org.apache.kafka.clients.admin.NewTopic
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -10,12 +8,7 @@ import reactor.kafka.sender.SenderOptions
 
 
 @Configuration
-class KafkaConfig(
-    private val config: GeneratorConfig.Props
-) {
-
-    @Bean
-    fun topic() = NewTopic(INPUT_TOPIC, config.partitions.toInt(), config.topicReplicationFactor.toShort())
+class KafkaConfig {
 
     @Bean
     fun reactiveKafkaProducerTemplate(properties: KafkaProperties): ReactiveKafkaProducerTemplate<String?, ByteArray> {
@@ -24,6 +17,6 @@ class KafkaConfig(
     }
 
     companion object {
-        const val INPUT_TOPIC = "inbound-stream"
+        const val INPUT_TOPIC = "input"
     }
 }

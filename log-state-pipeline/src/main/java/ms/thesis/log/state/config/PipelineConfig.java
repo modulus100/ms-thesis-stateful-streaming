@@ -34,8 +34,8 @@ public class PipelineConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PipelineConfig.class);
 
-    public static final String IN_TOPIC = "inbound-stream";
-    public static final String OUT_TOPIC = "processed-stream";
+    public static final String IN_TOPIC = "input";
+    public static final String OUT_TOPIC = "output";
 
 
     @Bean

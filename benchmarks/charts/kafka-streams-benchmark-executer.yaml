@@ -5,11 +5,11 @@ metadata:
 spec:
   benchmark: "kafka-streams-benchmark"
   load:
-    loadType: "NumSensors"
-    loadValues: [25000, 50000]
+    loadType: "NumOfJobs"
+    loadValues: [20000]
   resources:
     resourceType: "Instances"
-    resourceValues: [1, 2]
+    resourceValues: [4]
   slos:
     - name: "lag trend"
       properties:

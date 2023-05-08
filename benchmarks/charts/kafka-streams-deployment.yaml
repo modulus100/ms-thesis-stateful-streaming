@@ -12,7 +12,6 @@ spec:
       labels:
         app: "kafka-streams-job"
     spec:
-      serviceAccountName: "benchmarks"
       containers:
         - name: "kafka-streams-job"
           image: 778851315920.dkr.ecr.us-east-1.amazonaws.com/kafka-streams-stateful-streaming-job

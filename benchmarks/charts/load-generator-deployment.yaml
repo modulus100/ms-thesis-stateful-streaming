@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: "load-generator"
 spec:
-  replicas: 1
+  replicas: 10
   selector:
     matchLabels:
       app: "load-generator"
@@ -12,7 +12,6 @@ spec:
       labels:
         app: "load-generator"
     spec:
-      serviceAccountName: "benchmark"
       containers:
         - name: "load-generator"
           image: 778851315920.dkr.ecr.us-east-1.amazonaws.com/load-generator:latest

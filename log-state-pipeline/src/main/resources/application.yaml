@@ -8,7 +8,7 @@ spring:
           value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
     bootstrap-servers: localhost:9092
     consumer:
-      group-id: kafka-consumer-group
+      group-id: my-kafka-streams-app
       auto-offset-reset: latest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
