@@ -6,10 +6,10 @@ spec:
   benchmark: "kafka-streams-benchmark"
   load:
     loadType: "NumOfJobs"
-    loadValues: [20000]
+    loadValues: [6500, 6500, 6500, 6500]
   resources:
     resourceType: "Instances"
-    resourceValues: [4]
+    resourceValues: [2, 4, 6, 8]
   slos:
     - name: "lag trend"
       properties:

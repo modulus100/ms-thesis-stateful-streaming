@@ -89,8 +89,7 @@ public class PipelineConfig {
                 (key, value, aggregate) -> consumer.accept(value, aggregate),
                 Materialized.with(Serdes.String(), new StateSerde()))
             .toStream()
-            .mapValues(state -> (long) longVarHandle.get(state.getData(), 0))
-            .peek((k, v) -> LOGGER.info("Received record, key: {}, value:{}", k, v));
+            .mapValues(state -> (long) longVarHandle.get(state.getData(), 0));
 
         stream.to(OUT_TOPIC, Produced.with(Serdes.String(), Serdes.Long()));
         return stream;
